@@ -1,9 +1,10 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>For Gabby</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet"/>
   <style>
     body {
       margin: 0;
@@ -14,86 +15,83 @@
       color: white;
       font-family: 'Dancing Script', cursive;
       overflow-x: hidden;
-    }.container {
-  text-align: center;
-  padding: 60px 20px;
-  max-width: 850px;
-  margin: auto;
-  animation: fadeIn 2s ease-in-out;
-}
+    }
 
-h1 {
-  font-size: 3em;
-  margin-bottom: 30px;
-}
+    .container {
+      text-align: center;
+      padding: 60px 20px;
+      max-width: 850px;
+      margin: auto;
+      animation: fadeIn 2s ease-in-out;
+    }
 
-p {
-  font-size: 1.6em;
-  margin-bottom: 25px;
-  line-height: 1.8;
-}
+    h1 {
+      font-size: 3.2em;
+      margin-bottom: 30px;
+    }
 
-audio {
-  display: none;
-}
+    p {
+      font-size: 1.6em;
+      margin-bottom: 25px;
+      line-height: 1.8;
+    }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+    button {
+      font-size: 20px;
+      padding: 12px 25px;
+      border-radius: 10px;
+      background-color: #ffffff22;
+      border: none;
+      color: white;
+      cursor: pointer;
+      margin-top: 30px;
+    }
 
-.heart {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  background: pink;
-  transform: rotate(45deg);
-  animation: float 10s linear infinite;
-  opacity: 0.7;
-  z-index: 0;
-}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-.heart::before, .heart::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: pink;
-  border-radius: 50%;
-}
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: float 10s linear infinite;
+      opacity: 0.7;
+      z-index: 0;
+    }
 
-.heart::before {
-  top: -10px;
-  left: 0;
-}
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
 
-.heart::after {
-  left: -10px;
-  top: 0;
-}
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: -10px; top: 0; }
 
-@keyframes float {
-  0% {
-    bottom: -20px;
-    left: calc(100% * var(--i));
-    opacity: 0.7;
-  }
-  100% {
-    bottom: 120%;
-    left: calc(100% * var(--i) + 30px);
-    opacity: 0;
-  }
-}
+    @keyframes float {
+      0% {
+        bottom: -20px;
+        left: calc(100% * var(--i));
+        opacity: 0.7;
+      }
+      100% {
+        bottom: 120%;
+        left: calc(100% * var(--i) + 30px);
+        opacity: 0;
+      }
+    }
 
-@media only screen and (max-width: 600px) {
-  h1 {
-    font-size: 2.2em;
-  }
-  p {
-    font-size: 1.3em;
-  }
-}
-
+    @media only screen and (max-width: 600px) {
+      h1 { font-size: 2.2em; }
+      p { font-size: 1.3em; }
+    }
   </style>
 </head>
 <body>
@@ -109,7 +107,7 @@ audio {
       Every day I spend with you feels like magic. You’re beautiful inside and out, and I admire how you carry yourself with so much grace, kindness, and determination. I want to walk this life with you — through the highs and lows — hand in hand, heart to heart.
     </p>
     <p>
-      As you prepare for your exam on September 1st, I want you to remember how deeply I believe in you. Your brilliance shines through everything you do. No exam can measure your worth, your beauty, or your heart.
+      As you prepare for your exam on <strong>September 1st</strong>, I want you to remember how deeply I believe in you. Your brilliance shines through everything you do. No exam can measure your worth, your beauty, or your heart.
     </p>
     <p>
       This journey might feel tough, but you're tougher. You've come this far with grace and power — now finish strong, my queen. I’m rooting for you every second.
@@ -117,23 +115,37 @@ audio {
     <p>
       I love you endlessly, Gabby. I’m so proud of you. Always and forever.
     </p>
-  </div>  <!-- Countdown Timer -->  <div style="text-align: center; margin-top: 40px;">
-    <h2 style="font-size: 2em;">⏳ Countdown to Your Exam, Gabby</h2>
+
+    <!-- Countdown Timer -->
+    <h2 style="margin-top: 40px; font-size: 2em;">⏳ Countdown to Your Exam</h2>
     <div id="countdown" style="font-size: 1.8em; margin-top: 10px;"></div>
-  </div>  <!-- Background Music and Voice Message -->  <audio autoplay loop>
+
+    <!-- Play Button -->
+    <button onclick="playAudio()">▶️ Play Love Song & Voice</button>
+  </div>
+
+  <!-- Audio Files -->
+  <audio id="love-song" loop>
     <source src="love.mp3" type="audio/mpeg">
-    Your browser does not support the audio tag.
   </audio>
-  <audio autoplay>
+
+  <audio id="voice-msg">
     <source src="voice.mp3" type="audio/mpeg">
-    Your browser does not support the audio tag.
-  </audio>  <!-- Floating Hearts -->  <script>
+  </audio>
+
+  <!-- Floating Hearts -->
+  <script>
     for (let i = 0; i < 15; i++) {
       const heart = document.createElement('div');
       heart.className = 'heart';
       heart.style.setProperty('--i', Math.random());
       heart.style.left = `${Math.random() * 100}%`;
       document.body.appendChild(heart);
+    }
+
+    function playAudio() {
+      document.getElementById('love-song').play();
+      document.getElementById('voice-msg').play();
     }
 
     // Countdown Timer
@@ -155,5 +167,6 @@ audio {
         countdown.innerHTML = `${days} days, ${hours} hrs, ${minutes} mins, ${seconds} secs`;
       }
     }, 1000);
-  </script></body>
-</html>
+  </script>
+</body>
+  </html>

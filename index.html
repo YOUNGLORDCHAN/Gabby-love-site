@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>For Gabby</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <style>
@@ -16,38 +16,36 @@
       font-family: 'Dancing Script', cursive;
       overflow-x: hidden;
     }
+
     .container {
-      text-align: center;
-      padding: 60px 20px;
       max-width: 850px;
       margin: auto;
-      animation: fadeIn 2s ease-in-out;
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
     }
 
     h1 {
       font-size: 3em;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
-    p {
+    #typeText {
       font-size: 1.6em;
-      margin-bottom: 25px;
       line-height: 1.8;
+      white-space: pre-line;
+      border-right: 2px solid white;
+      display: inline-block;
+      animation: blink 1s step-end infinite;
     }
 
-    h2 {
-      font-size: 2em;
-      color: #fff;
-      margin-top: 40px;
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: white; }
     }
 
     audio {
       display: none;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .heart {
@@ -93,12 +91,20 @@
       }
     }
 
+    .footer {
+      margin-top: 40px;
+      font-size: 2em;
+    }
+
     @media only screen and (max-width: 600px) {
       h1 {
         font-size: 2.2em;
       }
-      p {
+      #typeText {
         font-size: 1.3em;
+      }
+      .footer {
+        font-size: 1.6em;
       }
     }
   </style>
@@ -106,40 +112,34 @@
 <body>
   <div class="container">
     <h1>To My Dearest Gabby 💖</h1>
-    <p>
-      You are the light that brightens my every day, the calm in my chaos, and the dream I never want to wake up from. Gabby, your strength, your smile, and your heart make this world a better place.
-    </p>
-    <p>
-      I just want to say how grateful I am to have you. Your presence in my life brings so much warmth, laughter, and peace. Loving you has made me a better person.
-    </p>
-    <p>
-      Every day I spend with you feels like magic. You’re beautiful inside and out, and I admire how you carry yourself with so much grace, kindness, and determination. I want to walk this life with you — through the highs and lows — hand in hand, heart to heart.
-    </p>
-    <p>
-      As you prepare for your exam on September 1st, I want you to remember how deeply I believe in you. Your brilliance shines through everything you do. No exam can measure your worth, your beauty, or your heart.
-    </p>
-    <p>
-      This journey might feel tough, but you're tougher. You've come this far with grace and power — now finish strong, my queen. I’m rooting for you every second.
-    </p>
-    <p>
-      I love you endlessly, Gabby. I’m so proud of you. Always and forever.
-    </p>
-    <h2>💝 Happy Belated Girlfriend’s Day, mi amor 💝</h2>
+    <div id="typeText"></div>
+    <div class="footer">💝 Happy Belated Girlfriend’s Day, mi amor 💝</div>
   </div>
 
-  <!-- Background Music and Voice Message -->
+  <!-- Background Music -->
   <audio autoplay loop>
     <source src="love.mp3" type="audio/mpeg">
     Your browser does not support the audio tag.
   </audio>
 
-  <audio autoplay>
-    <source src="voice.mp3" type="audio/mpeg">
-    Your browser does not support the audio tag.
-  </audio>
-
   <!-- Floating Hearts -->
   <script>
+    const message = `You are the light that brightens my every day, the calm in my chaos, and the dream I never want to wake up from.\n\nGabby, your strength, your smile, and your heart make this world a better place.\n\nI just want to say how grateful I am to have you. Your presence in my life brings so much warmth, laughter, and peace. Loving you has made me a better person.\n\nAs you journey through life and prepare for the challenges ahead, know that I will always be here for you, cheering you on.\n\nYou’ve made it this far with grace and strength — and I believe in you, always.\n\nI love you endlessly, Gabby. I’m so proud of you. Always and forever. 💗`;
+
+    const textEl = document.getElementById("typeText");
+    let idx = 0;
+
+    function typeWriter() {
+      if (idx < message.length) {
+        textEl.innerHTML += message.charAt(idx);
+        idx++;
+        setTimeout(typeWriter, 40);
+      }
+    }
+
+    typeWriter();
+
+    // Floating hearts
     for (let i = 0; i < 15; i++) {
       const heart = document.createElement('div');
       heart.className = 'heart';

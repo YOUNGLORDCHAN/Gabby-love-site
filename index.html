@@ -4,41 +4,67 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>For Gabby</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
       padding: 0;
       background: linear-gradient(to bottom right, #3f87a6, #f78da7);
       color: white;
-      font-family: 'Great Vibes', cursive;
+      font-family: 'Dancing Script', cursive;
       overflow-x: hidden;
+      text-align: center;
     }
 
-    .welcome {
+    .container {
+      padding: 60px 20px;
+      max-width: 850px;
+      margin: auto;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.6em;
+      margin-bottom: 25px;
+      line-height: 1.8;
+    }
+
+    .button {
+      padding: 12px 24px;
+      font-size: 1.3em;
+      background-color: #ff69b4;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      cursor: pointer;
+      margin-top: 30px;
+      font-family: 'Dancing Script', cursive;
+    }
+
+    .fireworks {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: #000000cc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2em;
-      z-index: 100;
-      animation: fadeIn 2s ease-in-out;
+      pointer-events: none;
+      z-index: 1000;
     }
 
-    .typewriter {
-      overflow: hidden;
+    .ending-text {
+      font-size: 2em;
+      margin-top: 50px;
+      color: #fff0f5;
+      animation: typing 4s steps(40, end), blink .75s step-end infinite;
       white-space: nowrap;
-      border-right: 2px solid white;
-      animation: typing 4s steps(40, end), blink 0.8s infinite;
+      overflow: hidden;
+      border-right: 3px solid white;
       width: 0;
-      margin: 40px auto;
-      text-align: center;
-      font-size: 2.2em;
     }
 
     @keyframes typing {
@@ -50,163 +76,96 @@
       50% { border-color: transparent }
     }
 
-    .container {
-      display: none;
-      text-align: center;
-      padding: 40px 20px;
-      max-width: 850px;
-      margin: auto;
-    }
-
-    button {
-      font-size: 1.4em;
-      padding: 10px 25px;
-      border: none;
-      background-color: white;
-      color: #f78da7;
-      font-weight: bold;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: 0.3s ease;
-      margin-top: 20px;
-      font-family: 'Great Vibes', cursive;
-    }
-
-    button:hover {
-      background-color: #fce4ec;
-    }
-
-    #message {
-      display: none;
-      margin-top: 30px;
-      font-size: 1.4em;
-      line-height: 1.8;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     audio {
       display: none;
     }
 
-    .heart {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      background: pink;
-      transform: rotate(45deg);
-      animation: float 10s linear infinite;
-      opacity: 0.7;
-      z-index: 0;
-    }
-
-    .heart::before, .heart::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: pink;
-      border-radius: 50%;
-    }
-
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-
-    .heart::after {
-      left: -10px;
-      top: 0;
-    }
-
-    @keyframes float {
-      0% {
-        bottom: -20px;
-        left: calc(100% * var(--i));
-        opacity: 0.7;
-      }
-      100% {
-        bottom: 120%;
-        left: calc(100% * var(--i) + 30px);
-        opacity: 0;
-      }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     @media only screen and (max-width: 600px) {
-      .typewriter { font-size: 1.6em; }
-      #message { font-size: 1.2em; }
+      h1 { font-size: 2.2em; }
+      p { font-size: 1.3em; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Welcome Screen -->
-  <div class="welcome" id="welcomeScreen">
-    Loading surprise for Gabby 💗...
+  <div class="container">
+    <h1>To My Dearest Gabby 💖</h1>
+    <p>
+      You are the light that brightens my every day, the calm in my chaos, and the dream I never want to wake up from.
+    </p>
+    <p>
+      Your strength, your smile, and your love make this world a better place. I’m so lucky to have you in my life.
+    </p>
+    <p>
+      No matter what challenges come your way, know that I believe in you. You're amazing, brilliant, and powerful.
+    </p>
+    <p>
+      Happy belated Girlfriend’s Day, mi amor ❤️
+    </p>
+
+    <button class="button" onclick="showFireworks()">Tap for a surprise ✨</button>
+
+    <div id="endingText" class="ending-text" style="margin-top: 60px;"></div>
   </div>
 
-  <!-- Floating Hearts -->
-  <script>
-    for (let i = 0; i < 20; i++) {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.style.setProperty('--i', Math.random());
-      heart.style.left = `${Math.random() * 100}%`;
-      document.body.appendChild(heart);
-    }
-  </script>
+  <!-- Fireworks Canvas -->
+  <canvas id="fireworksCanvas" class="fireworks"></canvas>
 
-  <!-- Main Content -->
-  <div class="container" id="mainContent">
-    <div class="typewriter">Happy belated Girlfriend’s Day, mi amor 💗</div>
-
-    <button id="revealBtn">Message for You 💌</button>
-
-    <div id="message">
-      <p>
-        You are the light that brightens my every day, the calm in my chaos, and the dream I never want to wake up from. Gabby, your strength, your smile, and your heart make this world a better place.
-      </p>
-      <p>
-        I just want to say how grateful I am to have you. Your presence in my life brings so much warmth, laughter, and peace. Loving you has made me a better person.
-      </p>
-      <p>
-        Every day I spend with you feels like magic. You’re beautiful inside and out, and I admire how you carry yourself with so much grace, kindness, and determination. I want to walk this life with you — through the highs and lows — hand in hand, heart to heart.
-      </p>
-      <p>
-        I love you endlessly, Gabby. I’m so proud of you. Always and forever. 💖
-      </p>
-    </div>
-  </div>
-
-  <!-- Background Music -->
-  <audio id="bgMusic" autoplay loop>
-    <source src="love.mp3" type="audio/mpeg">
+  <!-- Background Song -->
+  <audio autoplay loop>
+    <source src="love.mp3" type="audio/mpeg" />
     Your browser does not support the audio tag.
   </audio>
 
-  <!-- Script -->
+  <!-- Fireworks and Ending Message Script -->
   <script>
-    const revealBtn = document.getElementById("revealBtn");
-    const message = document.getElementById("message");
-    const music = document.getElementById("bgMusic");
+    function showFireworks() {
+      const canvas = document.getElementById('fireworksCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
 
-    revealBtn.addEventListener("click", () => {
-      message.style.display = "block";
-      revealBtn.style.display = "none";
-    });
+      const particles = [];
 
-    // Fade out welcome screen and show main content
-    setTimeout(() => {
-      document.getElementById("welcomeScreen").style.display = "none";
-      document.getElementById("mainContent").style.display = "block";
-      music.play().catch(() => {
-        // Music may not autoplay until user interacts
-        console.log("Music autoplay blocked, will play on interaction.");
-      });
-    }, 3000);
+      for (let i = 0; i < 100; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          speedX: (Math.random() - 0.5) * 8,
+          speedY: (Math.random() - 0.5) * 8,
+          radius: Math.random() * 3 + 2,
+          color: `hsl(${Math.random() * 360}, 100%, 70%)`
+        });
+      }
+
+      let count = 0;
+      const interval = setInterval(() => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+          p.x += p.speedX;
+          p.y += p.speedY;
+          p.radius *= 0.96;
+        });
+
+        count++;
+        if (count > 60) {
+          clearInterval(interval);
+          canvas.style.display = 'none';
+        }
+      }, 50);
+
+      // Ending message
+      document.getElementById('endingText').textContent = "Forever yours — in love, in dreams, in everything. 💞";
+    }
   </script>
 </body>
   </html>

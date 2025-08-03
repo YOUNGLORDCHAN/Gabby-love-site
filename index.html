@@ -18,6 +18,7 @@
       font-family: 'Great Vibes', cursive;
       color: white;
       text-align: center;
+      background: linear-gradient(135deg, #1e3c72, #2a5298); /* beautiful blue gradient */
     }
 
     #loginPage, #mainPage {
@@ -33,7 +34,7 @@
 
     #loginPage {
       display: flex;
-      background: #001f3f;
+      background: rgba(0, 0, 0, 0.5);
     }
 
     #loginPage input {
@@ -58,26 +59,6 @@
       flex-direction: column;
       justify-content: flex-start;
       overflow-y: auto;
-    }
-
-    video#bgVideo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: -2;
-    }
-
-    #blueOverlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 255, 0.4);
-      z-index: -1;
     }
 
     .container {
@@ -187,13 +168,6 @@
 
     <button class="message-btn" onclick="startShow()">💌</button>
   </div>
-
-  <!-- Background Video -->
-  <video autoplay muted loop id="bgVideo">
-    <source src="gabby.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  <div id="blueOverlay"></div>
 
   <!-- Audio -->
   <audio id="fireworkSound" src="fireworks.mp3"></audio>

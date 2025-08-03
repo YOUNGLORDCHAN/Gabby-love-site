@@ -6,24 +6,71 @@
   <title>To My Love, Gabby</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
   <style>
+    /* Basic reset */
     body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: linear-gradient(to bottom right, #6dd5fa, #fbc2eb);
+      margin: 0; padding: 0; height: 100%; overflow-x: hidden;
       font-family: 'Great Vibes', cursive;
       color: white;
-      text-align: center;
-      overflow-x: hidden;
       scroll-behavior: smooth;
       position: relative;
     }
 
-    /* Background Video */
+    /* Hide main content initially */
+    #mainContent {
+      display: none;
+      position: relative;
+      z-index: 1;
+      max-width: 850px;
+      margin: auto;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    /* Login overlay */
+    #loginOverlay {
+      position: fixed;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.95);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    #loginOverlay input {
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 1.1em;
+      border-radius: 5px;
+      border: none;
+      width: 220px;
+      text-align: center;
+    }
+
+    #loginOverlay button {
+      background-color: #ff4081;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 240px;
+      transition: background-color 0.3s ease;
+    }
+
+    #loginOverlay button:hover {
+      background-color: #e73370;
+    }
+
+    /* Background video */
     #bgVideo {
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100vw;
       height: 100vh;
       object-fit: cover;
@@ -31,14 +78,7 @@
       filter: brightness(0.6);
     }
 
-    .container {
-      padding: 50px 20px;
-      max-width: 850px;
-      margin: auto;
-      position: relative;
-      z-index: 1;
-    }
-
+    /* Text styling */
     h1 {
       font-size: 3em;
       margin-bottom: 20px;
@@ -64,18 +104,12 @@
     }
 
     @keyframes typing {
-      0% {
-        width: 0ch;
-      }
-      100% {
-        width: 40ch;
-      }
+      0% { width: 0ch; }
+      100% { width: 40ch; }
     }
 
     @keyframes blink {
-      50% {
-        border-color: transparent;
-      }
+      50% { border-color: transparent; }
     }
 
     @media only screen and (max-width: 600px) {
@@ -86,14 +120,22 @@
 </head>
 <body>
 
+  <!-- Login Overlay -->
+  <div id="loginOverlay">
+    <h2>Please log in to see my message</h2>
+    <input type="text" id="usernameInput" placeholder="Username" autocomplete="off" />
+    <input type="password" id="passwordInput" placeholder="Password" autocomplete="off" />
+    <button onclick="checkLogin()">Login</button>
+  </div>
+
   <!-- Background Video -->
-  <video autoplay muted loop playsinline id="bgVideo">
+  <video autoplay muted loop playsinline id="bgVideo" style="display:none;">
     <source src="background.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
   <!-- Main Content -->
-  <div class="container">
+  <div id="mainContent">
     <h1>To My Dearest Gabby 💖</h1>
     <p>
       You are my calm in every storm, the spark in my soul, and the most beautiful chapter in my life.
@@ -113,8 +155,32 @@
     </div>
   </div>
 
-  <!-- Background music -->
-  <audio id="bgMusic" src="love.mp3" autoplay loop></audio>
+  <!-- Background Music -->
+  <audio id="bgMusic" src="love.mp3" loop></audio>
+
+  <script>
+    const correctUsername = 'gabby';
+    const correctPassword = 'love123';
+
+    function checkLogin() {
+      const user = document.getElementById('usernameInput').value.trim();
+      const pass = document.getElementById('passwordInput').value.trim();
+
+      if(user === correctUsername && pass === correctPassword){
+        // Hide login overlay
+        document.getElementById('loginOverlay').style.display = 'none';
+
+        // Show video and main content
+        document.getElementById('bgVideo').style.display = 'block';
+        document.getElementById('mainContent').style.display = 'block';
+
+        // Play music (need user interaction to allow autoplay)
+        document.getElementById('bgMusic').play();
+      } else {
+        alert('Wrong username or password! Please try again.');
+      }
+    }
+  </script>
 
 </body>
-      </html>
+    </html>

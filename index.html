@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>To My Love, Gabby</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
       padding: 0;
       background: linear-gradient(to bottom right, #6dd5fa, #fbc2eb);
-      font-family: 'Dancing Script', cursive;
+      font-family: 'Great Vibes', cursive;
       color: white;
       text-align: center;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     .container {
@@ -28,31 +28,9 @@
     }
 
     p {
-      font-size: 1.6em;
+      font-size: 1.8em;
       margin-bottom: 25px;
       line-height: 1.8;
-    }
-
-    .button {
-      padding: 12px 24px;
-      font-size: 1.3em;
-      background-color: #ff69b4;
-      border: none;
-      border-radius: 30px;
-      color: white;
-      cursor: pointer;
-      margin-top: 30px;
-      font-family: 'Dancing Script', cursive;
-    }
-
-    .fireworks {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1000;
     }
 
     .ending-text {
@@ -75,17 +53,23 @@
       50% { border-color: transparent }
     }
 
-    @media only screen and (max-width: 600px) {
-      h1 { font-size: 2.2em; }
-      p { font-size: 1.3em; }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 999;
     }
 
-    audio {
-      display: none;
+    @media only screen and (max-width: 600px) {
+      h1 { font-size: 2.2em; }
+      p { font-size: 1.4em; }
     }
   </style>
 </head>
-<body>
+<body onclick="startShow()">
+
+  <canvas id="fireworksCanvas"></canvas>
 
   <div class="container">
     <h1>To My Dearest Gabby 💖</h1>
@@ -96,68 +80,127 @@
       As you prepare for your upcoming exam on September 1st, I want you to know that I believe in you with every beat of my heart.
     </p>
     <p>
-      You’re brilliant, strong, capable — and nothing can stop you. Let your heart shine through your hard work.
+      You’re brilliant, strong, and capable — nothing can stop you. Let your heart shine through your hard work.
     </p>
     <p>
       Happy belated Girlfriend's Day, mi amor. I’m here cheering for you, always.
     </p>
 
-    <button class="button" onclick="showFireworks()">Tap for a surprise ✨</button>
-
-    <div id="endingText" class="ending-text"></div>
+    <div id="endingText" class="ending-text">
+      Forever yours — in love, in life, in every heartbeat 💞
+    </div>
   </div>
 
-  <canvas id="fireworksCanvas" class="fireworks"></canvas>
-
-  <!-- Autoplay background song -->
-  <audio autoplay loop>
-    <source src="love.mp3" type="audio/mpeg" />
-    Your browser does not support the audio element.
-  </audio>
+  <audio id="fireworkSound" src="fireworks.mp3"></audio>
+  <audio id="bgMusic" src="love.mp3" loop></audio>
 
   <script>
-    function showFireworks() {
-      const canvas = document.getElementById('fireworksCanvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    let started = false;
 
-      const particles = [];
+    function startShow() {
+      if (started) return;
+      started = true;
 
-      for (let i = 0; i < 100; i++) {
-        particles.push({
-          x: canvas.width / 2,
-          y: canvas.height / 2,
-          speedX: (Math.random() - 0.5) * 10,
-          speedY: (Math.random() - 0.5) * 10,
-          radius: Math.random() * 3 + 2,
-          color: `hsl(${Math.random() * 360}, 100%, 70%)`
-        });
+      document.getElementById('fireworkSound').play();
+      setTimeout(() => {
+        document.getElementById('bgMusic').play();
+      }, 1500);
+
+      // Start fireworks
+      launchFireworks();
+    }
+
+    function launchFireworks() {
+      const canvas = document.getElementById("fireworksCanvas");
+      const ctx = canvas.getContext("2d");
+      let W = window.innerWidth;
+      let H = window.innerHeight;
+      canvas.width = W;
+      canvas.height = H;
+
+      const fireworks = [];
+
+      function random(min, max) {
+        return Math.random() * (max - min) + min;
       }
 
-      let count = 0;
-      const interval = setInterval(() => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fillStyle = p.color;
-          ctx.fill();
-          p.x += p.speedX;
-          p.y += p.speedY;
-          p.radius *= 0.96;
+      class Firework {
+        constructor() {
+          this.x = random(W * 0.3, W * 0.7);
+          this.y = H;
+          this.radius = 2;
+          this.color = `hsl(${random(0, 360)}, 100%, 50%)`;
+          this.vx = random(-2, 2);
+          this.vy = random(-8, -12);
+          this.alpha = 1;
+          this.sparkles = [];
+        }
+
+        explode() {
+          for (let i = 0; i < 30; i++) {
+            this.sparkles.push({
+              x: this.x,
+              y: this.y,
+              vx: random(-3, 3),
+              vy: random(-3, 3),
+              alpha: 1,
+              color: this.color
+            });
+          }
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.vy += 0.2;
+
+          if (this.vy > 0 && this.sparkles.length === 0) {
+            this.explode();
+          }
+
+          this.sparkles.forEach(s => {
+            s.x += s.vx;
+            s.y += s.vy;
+            s.alpha -= 0.02;
+          });
+
+          this.sparkles = this.sparkles.filter(s => s.alpha > 0);
+        }
+
+        draw(ctx) {
+          if (this.sparkles.length === 0) {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+          } else {
+            this.sparkles.forEach(s => {
+              ctx.globalAlpha = s.alpha;
+              ctx.fillStyle = s.color;
+              ctx.beginPath();
+              ctx.arc(s.x, s.y, 2, 0, Math.PI * 2);
+              ctx.fill();
+            });
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, W, H);
+        if (Math.random() < 0.1) fireworks.push(new Firework());
+
+        fireworks.forEach(fw => {
+          fw.update();
+          fw.draw(ctx);
         });
 
-        count++;
-        if (count > 60) {
-          clearInterval(interval);
-          canvas.style.display = 'none';
-        }
-      }, 50);
+        requestAnimationFrame(animate);
+      }
 
-      document.getElementById('endingText').textContent =
-        "Forever yours — in love, in life, in every heartbeat 💞";
+      animate();
     }
   </script>
+
 </body>
-</html>
+    </html>

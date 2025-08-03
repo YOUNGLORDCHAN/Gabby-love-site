@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>To My Love, Gabby</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
   <style>
@@ -16,14 +16,27 @@
       text-align: center;
       overflow-x: hidden;
       scroll-behavior: smooth;
+      position: relative;
     }
 
-    /* Hide everything initially */
-    #mainContent {
-      display: none;
-      max-width: 850px;
+    /* Background Video */
+    #bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.6);
+    }
+
+    .container {
       padding: 50px 20px;
+      max-width: 850px;
       margin: auto;
+      position: relative;
+      z-index: 1;
     }
 
     h1 {
@@ -44,7 +57,7 @@
       white-space: nowrap;
       overflow: hidden;
       border-right: 3px solid white;
-      width: max-content; /* fit text width */
+      width: max-content;
       animation:
         typing 4s steps(40) infinite,
         blink 0.75s step-end infinite;
@@ -55,7 +68,7 @@
         width: 0ch;
       }
       100% {
-        width: 40ch; /* adjust to match text length */
+        width: 40ch;
       }
     }
 
@@ -63,80 +76,6 @@
       50% {
         border-color: transparent;
       }
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 0;
-      width: 100vw;
-      height: 100vh;
-      display: none; /* hide until fireworks */
-    }
-
-    /* Message button styles */
-    #messageBtn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: #ff4081;
-      color: white;
-      border: none;
-      padding: 14px 18px;
-      border-radius: 50%;
-      font-size: 24px;
-      cursor: pointer;
-      z-index: 2;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
-      display: none; /* show after login */
-    }
-
-    #messageBtn:hover {
-      transform: scale(1.1);
-    }
-
-    /* Login overlay */
-    #loginOverlay {
-      position: fixed;
-      top:0; left:0; right:0; bottom:0;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
-      flex-direction: column;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
-
-    #loginOverlay input {
-      padding: 10px;
-      margin: 10px 0;
-      font-size: 1.1em;
-      border-radius: 5px;
-      border: none;
-      width: 220px;
-      text-align: center;
-    }
-
-    #loginOverlay button {
-      background-color: #ff4081;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-      width: 240px;
-      transition: background-color 0.3s ease;
-    }
-
-    #loginOverlay button:hover {
-      background-color: #e73370;
     }
 
     @media only screen and (max-width: 600px) {
@@ -147,22 +86,14 @@
 </head>
 <body>
 
-  <!-- Login Overlay -->
-  <div id="loginOverlay">
-    <h2>Welcome, please log in</h2>
-    <input type="text" id="usernameInput" placeholder="Username" autocomplete="off" />
-    <input type="password" id="passwordInput" placeholder="Password" autocomplete="off" />
-    <button onclick="checkLogin()">Login</button>
-  </div>
-
-  <!-- Fireworks Canvas -->
-  <canvas id="fireworksCanvas"></canvas>
-
-  <!-- Message Button -->
-  <button id="messageBtn" onclick="showMainContent()">💌</button>
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline id="bgVideo">
+    <source src="background.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
   <!-- Main Content -->
-  <div id="mainContent">
+  <div class="container">
     <h1>To My Dearest Gabby 💖</h1>
     <p>
       You are my calm in every storm, the spark in my soul, and the most beautiful chapter in my life.
@@ -177,165 +108,13 @@
       Happy belated Girlfriend's Day, mi amor. I’m here cheering for you, always.
     </p>
 
-    <div id="endingText" class="ending-text">
+    <div class="ending-text">
       Forever yours — in love, in life, in every heartbeat 💞
     </div>
   </div>
 
-  <!-- Audio Elements -->
-  <audio id="fireworkSound" src="fireworks.mp3"></audio>
-  <audio id="bgMusic" src="love.mp3" loop></audio>
+  <!-- Background music -->
+  <audio id="bgMusic" src="love.mp3" autoplay loop></audio>
 
-  <script>
-    const correctUsername = 'gabby';
-    const correctPassword = 'love123';
-
-    const loginOverlay = document.getElementById('loginOverlay');
-    const messageBtn = document.getElementById('messageBtn');
-    const mainContent = document.getElementById('mainContent');
-    const endingText = document.getElementById('endingText');
-    const fireworksCanvas = document.getElementById('fireworksCanvas');
-    const fireworkSound = document.getElementById('fireworkSound');
-    const bgMusic = document.getElementById('bgMusic');
-
-    // Login check
-    function checkLogin() {
-      const user = document.getElementById('usernameInput').value.trim();
-      const pass = document.getElementById('passwordInput').value.trim();
-
-      if(user === correctUsername && pass === correctPassword){
-        loginOverlay.style.display = 'none';
-        messageBtn.style.display = 'block';
-      } else {
-        alert('Wrong username or password! Please try again.');
-      }
-    }
-
-    // Show main content after tapping message icon
-    let fireworksStarted = false;
-    function showMainContent() {
-      if(fireworksStarted) return;
-      fireworksStarted = true;
-
-      messageBtn.style.display = 'none';
-      mainContent.style.display = 'block';
-      endingText.style.display = 'block';
-      fireworksCanvas.style.display = 'block';
-
-      fireworkSound.play();
-      setTimeout(() => {
-        bgMusic.play();
-      }, 1500);
-
-      launchFireworks();
-
-      // Scroll to top smoothly
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Fireworks animation with short burst (~5 seconds)
-    function launchFireworks() {
-      const ctx = fireworksCanvas.getContext("2d");
-      let W = window.innerWidth;
-      let H = window.innerHeight;
-      fireworksCanvas.width = W;
-      fireworksCanvas.height = H;
-
-      const fireworks = [];
-
-      function random(min, max) {
-        return Math.random() * (max - min) + min;
-      }
-
-      class Firework {
-        constructor() {
-          this.x = random(W * 0.3, W * 0.7);
-          this.y = H;
-          this.radius = 2;
-          this.color = `hsl(${random(0, 360)}, 100%, 50%)`;
-          this.vx = random(-2, 2);
-          this.vy = random(-8, -12);
-          this.alpha = 1;
-          this.sparkles = [];
-        }
-
-        explode() {
-          for (let i = 0; i < 30; i++) {
-            this.sparkles.push({
-              x: this.x,
-              y: this.y,
-              vx: random(-3, 3),
-              vy: random(-3, 3),
-              alpha: 1,
-              color: this.color
-            });
-          }
-        }
-
-        update() {
-          this.x += this.vx;
-          this.y += this.vy;
-          this.vy += 0.2;
-
-          if (this.vy > 0 && this.sparkles.length === 0) {
-            this.explode();
-          }
-
-          this.sparkles.forEach(s => {
-            s.x += s.vx;
-            s.y += s.vy;
-            s.alpha -= 0.02;
-          });
-
-          this.sparkles = this.sparkles.filter(s => s.alpha > 0);
-        }
-
-        draw(ctx) {
-          if (this.sparkles.length === 0) {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
-            ctx.fill();
-          } else {
-            this.sparkles.forEach(s => {
-              ctx.globalAlpha = s.alpha;
-              ctx.fillStyle = s.color;
-              ctx.beginPath();
-              ctx.arc(s.x, s.y, 2, 0, Math.PI * 2);
-              ctx.fill();
-            });
-            ctx.globalAlpha = 1;
-          }
-        }
-      }
-
-      let animationId;
-      let startTime = null;
-
-      function animate(timestamp) {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-
-        ctx.clearRect(0, 0, W, H);
-        if (Math.random() < 0.1) fireworks.push(new Firework());
-
-        fireworks.forEach(fw => {
-          fw.update();
-          fw.draw(ctx);
-        });
-
-        // Stop after 5 seconds
-        if (elapsed < 5000) {
-          animationId = requestAnimationFrame(animate);
-        } else {
-          cancelAnimationFrame(animationId);
-          ctx.clearRect(0, 0, W, H);
-          fireworksCanvas.style.display = 'none';
-        }
-      }
-
-      animate();
-    }
-  </script>
 </body>
-  </html>
+      </html>

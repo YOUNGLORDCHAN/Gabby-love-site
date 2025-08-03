@@ -41,20 +41,28 @@
       font-size: 2em;
       margin-top: 60px;
       color: #fff0f5;
-      animation: typing 4s steps(40, end) infinite, blink .75s step-end infinite;
       white-space: nowrap;
       overflow: hidden;
       border-right: 3px solid white;
-      width: 100%; /* Show full width always */
+      width: max-content; /* fit text width */
+      animation:
+        typing 4s steps(40) infinite,
+        blink 0.75s step-end infinite;
     }
 
     @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+      0% {
+        width: 0ch;
+      }
+      100% {
+        width: 40ch; /* adjust to match text length */
+      }
     }
 
     @keyframes blink {
-      50% { border-color: transparent }
+      50% {
+        border-color: transparent;
+      }
     }
 
     canvas {
@@ -330,4 +338,4 @@
     }
   </script>
 </body>
-</html>
+  </html>

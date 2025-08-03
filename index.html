@@ -6,9 +6,10 @@
   <title>To My Love, Gabby</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
   <style>
-    body {
+    body, html {
       margin: 0;
       padding: 0;
+      height: 100%;
       background: linear-gradient(to bottom right, #6dd5fa, #fbc2eb);
       font-family: 'Great Vibes', cursive;
       color: white;
@@ -17,9 +18,11 @@
       scroll-behavior: smooth;
     }
 
-    .container {
-      padding: 50px 20px;
+    /* Hide everything initially */
+    #mainContent {
+      display: none;
       max-width: 850px;
+      padding: 50px 20px;
       margin: auto;
     }
 
@@ -38,11 +41,11 @@
       font-size: 2em;
       margin-top: 60px;
       color: #fff0f5;
-      animation: typing 4s steps(40, end), blink .75s step-end infinite;
+      animation: typing 4s steps(40, end) infinite, blink .75s step-end infinite;
       white-space: nowrap;
       overflow: hidden;
       border-right: 3px solid white;
-      width: 0;
+      width: 100%; /* Show full width always */
     }
 
     @keyframes typing {
@@ -58,13 +61,15 @@
       position: fixed;
       top: 0;
       left: 0;
-      pointer-events: none;  /* <-- This allows scrolling through the canvas */
+      pointer-events: none;
       z-index: 0;
       width: 100vw;
       height: 100vh;
+      display: none; /* hide until fireworks */
     }
 
-    .message-btn {
+    /* Message button styles */
+    #messageBtn {
       position: fixed;
       bottom: 30px;
       right: 30px;
@@ -78,10 +83,52 @@
       z-index: 2;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       transition: transform 0.3s ease;
+      display: none; /* show after login */
     }
 
-    .message-btn:hover {
+    #messageBtn:hover {
       transform: scale(1.1);
+    }
+
+    /* Login overlay */
+    #loginOverlay {
+      position: fixed;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      flex-direction: column;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    #loginOverlay input {
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 1.1em;
+      border-radius: 5px;
+      border: none;
+      width: 220px;
+      text-align: center;
+    }
+
+    #loginOverlay button {
+      background-color: #ff4081;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 240px;
+      transition: background-color 0.3s ease;
+    }
+
+    #loginOverlay button:hover {
+      background-color: #e73370;
     }
 
     @media only screen and (max-width: 600px) {
@@ -92,9 +139,22 @@
 </head>
 <body>
 
+  <!-- Login Overlay -->
+  <div id="loginOverlay">
+    <h2>Welcome, please log in</h2>
+    <input type="text" id="usernameInput" placeholder="Username" autocomplete="off" />
+    <input type="password" id="passwordInput" placeholder="Password" autocomplete="off" />
+    <button onclick="checkLogin()">Login</button>
+  </div>
+
+  <!-- Fireworks Canvas -->
   <canvas id="fireworksCanvas"></canvas>
 
-  <div class="container">
+  <!-- Message Button -->
+  <button id="messageBtn" onclick="showMainContent()">💌</button>
+
+  <!-- Main Content -->
+  <div id="mainContent">
     <h1>To My Dearest Gabby 💖</h1>
     <p>
       You are my calm in every storm, the spark in my soul, and the most beautiful chapter in my life.
@@ -114,35 +174,64 @@
     </div>
   </div>
 
-  <!-- Floating message icon button -->
-  <button class="message-btn" onclick="startShow()">💌</button>
-
   <!-- Audio Elements -->
   <audio id="fireworkSound" src="fireworks.mp3"></audio>
   <audio id="bgMusic" src="love.mp3" loop></audio>
 
   <script>
-    let started = false;
+    const correctUsername = 'gabby';
+    const correctPassword = 'love123';
 
-    function startShow() {
-      if (started) return;
-      started = true;
+    const loginOverlay = document.getElementById('loginOverlay');
+    const messageBtn = document.getElementById('messageBtn');
+    const mainContent = document.getElementById('mainContent');
+    const endingText = document.getElementById('endingText');
+    const fireworksCanvas = document.getElementById('fireworksCanvas');
+    const fireworkSound = document.getElementById('fireworkSound');
+    const bgMusic = document.getElementById('bgMusic');
 
-      document.getElementById('fireworkSound').play();
+    // Login check
+    function checkLogin() {
+      const user = document.getElementById('usernameInput').value.trim();
+      const pass = document.getElementById('passwordInput').value.trim();
+
+      if(user === correctUsername && pass === correctPassword){
+        loginOverlay.style.display = 'none';
+        messageBtn.style.display = 'block';
+      } else {
+        alert('Wrong username or password! Please try again.');
+      }
+    }
+
+    // Show main content after tapping message icon
+    let fireworksStarted = false;
+    function showMainContent() {
+      if(fireworksStarted) return;
+      fireworksStarted = true;
+
+      messageBtn.style.display = 'none';
+      mainContent.style.display = 'block';
+      endingText.style.display = 'block';
+      fireworksCanvas.style.display = 'block';
+
+      fireworkSound.play();
       setTimeout(() => {
-        document.getElementById('bgMusic').play();
+        bgMusic.play();
       }, 1500);
 
       launchFireworks();
+
+      // Scroll to top smoothly
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // Fireworks animation with short burst (~5 seconds)
     function launchFireworks() {
-      const canvas = document.getElementById("fireworksCanvas");
-      const ctx = canvas.getContext("2d");
+      const ctx = fireworksCanvas.getContext("2d");
       let W = window.innerWidth;
       let H = window.innerHeight;
-      canvas.width = W;
-      canvas.height = H;
+      fireworksCanvas.width = W;
+      fireworksCanvas.height = H;
 
       const fireworks = [];
 
@@ -212,7 +301,13 @@
         }
       }
 
-      function animate() {
+      let animationId;
+      let startTime = null;
+
+      function animate(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+
         ctx.clearRect(0, 0, W, H);
         if (Math.random() < 0.1) fireworks.push(new Firework());
 
@@ -221,11 +316,18 @@
           fw.draw(ctx);
         });
 
-        requestAnimationFrame(animate);
+        // Stop after 5 seconds
+        if (elapsed < 5000) {
+          animationId = requestAnimationFrame(animate);
+        } else {
+          cancelAnimationFrame(animationId);
+          ctx.clearRect(0, 0, W, H);
+          fireworksCanvas.style.display = 'none';
+        }
       }
 
       animate();
     }
   </script>
 </body>
-    </html>
+</html>

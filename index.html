@@ -3,24 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For Gabby</title>
+  <title>To My Love, Gabby</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom right, #3f87a6, #f78da7);
-      color: white;
+      background: linear-gradient(to bottom right, #6dd5fa, #fbc2eb);
       font-family: 'Dancing Script', cursive;
-      overflow-x: hidden;
+      color: white;
       text-align: center;
+      overflow-x: hidden;
     }
 
     .container {
-      padding: 60px 20px;
+      padding: 50px 20px;
       max-width: 850px;
       margin: auto;
-      animation: fadeIn 2s ease-in-out;
     }
 
     h1 {
@@ -58,7 +57,7 @@
 
     .ending-text {
       font-size: 2em;
-      margin-top: 50px;
+      margin-top: 60px;
       color: #fff0f5;
       animation: typing 4s steps(40, end), blink .75s step-end infinite;
       white-space: nowrap;
@@ -76,18 +75,13 @@
       50% { border-color: transparent }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @media only screen and (max-width: 600px) {
+      h1 { font-size: 2.2em; }
+      p { font-size: 1.3em; }
     }
 
     audio {
       display: none;
-    }
-
-    @media only screen and (max-width: 600px) {
-      h1 { font-size: 2.2em; }
-      p { font-size: 1.3em; }
     }
   </style>
 </head>
@@ -96,33 +90,31 @@
   <div class="container">
     <h1>To My Dearest Gabby 💖</h1>
     <p>
-      You are the light that brightens my every day, the calm in my chaos, and the dream I never want to wake up from.
+      You are my calm in every storm, the spark in my soul, and the most beautiful chapter in my life.
     </p>
     <p>
-      Your strength, your smile, and your love make this world a better place. I’m so lucky to have you in my life.
+      As you prepare for your upcoming exam on September 1st, I want you to know that I believe in you with every beat of my heart.
     </p>
     <p>
-      No matter what challenges come your way, know that I believe in you. You're amazing, brilliant, and powerful.
+      You’re brilliant, strong, capable — and nothing can stop you. Let your heart shine through your hard work.
     </p>
     <p>
-      Happy belated Girlfriend’s Day, mi amor ❤️
+      Happy belated Girlfriend's Day, mi amor. I’m here cheering for you, always.
     </p>
 
     <button class="button" onclick="showFireworks()">Tap for a surprise ✨</button>
 
-    <div id="endingText" class="ending-text" style="margin-top: 60px;"></div>
+    <div id="endingText" class="ending-text"></div>
   </div>
 
-  <!-- Fireworks Canvas -->
   <canvas id="fireworksCanvas" class="fireworks"></canvas>
 
-  <!-- Background Song -->
+  <!-- Autoplay background song -->
   <audio autoplay loop>
     <source src="love.mp3" type="audio/mpeg" />
-    Your browser does not support the audio tag.
+    Your browser does not support the audio element.
   </audio>
 
-  <!-- Fireworks and Ending Message Script -->
   <script>
     function showFireworks() {
       const canvas = document.getElementById('fireworksCanvas');
@@ -136,8 +128,8 @@
         particles.push({
           x: canvas.width / 2,
           y: canvas.height / 2,
-          speedX: (Math.random() - 0.5) * 8,
-          speedY: (Math.random() - 0.5) * 8,
+          speedX: (Math.random() - 0.5) * 10,
+          speedY: (Math.random() - 0.5) * 10,
           radius: Math.random() * 3 + 2,
           color: `hsl(${Math.random() * 360}, 100%, 70%)`
         });
@@ -163,9 +155,9 @@
         }
       }, 50);
 
-      // Ending message
-      document.getElementById('endingText').textContent = "Forever yours — in love, in dreams, in everything. 💞";
+      document.getElementById('endingText').textContent =
+        "Forever yours — in love, in life, in every heartbeat 💞";
     }
   </script>
 </body>
-  </html>
+</html>

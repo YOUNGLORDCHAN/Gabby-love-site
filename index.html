@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>For Gabby</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -16,7 +16,6 @@
       font-family: 'Dancing Script', cursive;
       overflow-x: hidden;
     }
-
     .container {
       text-align: center;
       padding: 60px 20px;
@@ -26,7 +25,7 @@
     }
 
     h1 {
-      font-size: 3.2em;
+      font-size: 3em;
       margin-bottom: 30px;
     }
 
@@ -36,15 +35,14 @@
       line-height: 1.8;
     }
 
-    button {
-      font-size: 20px;
-      padding: 12px 25px;
-      border-radius: 10px;
-      background-color: #ffffff22;
-      border: none;
-      color: white;
-      cursor: pointer;
-      margin-top: 30px;
+    h2 {
+      font-size: 2em;
+      color: #fff;
+      margin-top: 40px;
+    }
+
+    audio {
+      display: none;
     }
 
     @keyframes fadeIn {
@@ -72,8 +70,15 @@
       border-radius: 50%;
     }
 
-    .heart::before { top: -10px; left: 0; }
-    .heart::after { left: -10px; top: 0; }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
 
     @keyframes float {
       0% {
@@ -89,8 +94,12 @@
     }
 
     @media only screen and (max-width: 600px) {
-      h1 { font-size: 2.2em; }
-      p { font-size: 1.3em; }
+      h1 {
+        font-size: 2.2em;
+      }
+      p {
+        font-size: 1.3em;
+      }
     }
   </style>
 </head>
@@ -107,7 +116,7 @@
       Every day I spend with you feels like magic. You’re beautiful inside and out, and I admire how you carry yourself with so much grace, kindness, and determination. I want to walk this life with you — through the highs and lows — hand in hand, heart to heart.
     </p>
     <p>
-      As you prepare for your exam on <strong>September 1st</strong>, I want you to remember how deeply I believe in you. Your brilliance shines through everything you do. No exam can measure your worth, your beauty, or your heart.
+      As you prepare for your exam on September 1st, I want you to remember how deeply I believe in you. Your brilliance shines through everything you do. No exam can measure your worth, your beauty, or your heart.
     </p>
     <p>
       This journey might feel tough, but you're tougher. You've come this far with grace and power — now finish strong, my queen. I’m rooting for you every second.
@@ -115,22 +124,18 @@
     <p>
       I love you endlessly, Gabby. I’m so proud of you. Always and forever.
     </p>
-
-    <!-- Countdown Timer -->
-    <h2 style="margin-top: 40px; font-size: 2em;">⏳ Countdown to Your Exam</h2>
-    <div id="countdown" style="font-size: 1.8em; margin-top: 10px;"></div>
-
-    <!-- Play Button -->
-    <button onclick="playAudio()">▶️ Play Love Song & Voice</button>
+    <h2>💝 Happy Belated Girlfriend’s Day, mi amor 💝</h2>
   </div>
 
-  <!-- Audio Files -->
-  <audio id="love-song" loop>
+  <!-- Background Music and Voice Message -->
+  <audio autoplay loop>
     <source src="love.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
   </audio>
 
-  <audio id="voice-msg">
+  <audio autoplay>
     <source src="voice.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
   </audio>
 
   <!-- Floating Hearts -->
@@ -142,31 +147,6 @@
       heart.style.left = `${Math.random() * 100}%`;
       document.body.appendChild(heart);
     }
-
-    function playAudio() {
-      document.getElementById('love-song').play();
-      document.getElementById('voice-msg').play();
-    }
-
-    // Countdown Timer
-    const countdown = document.getElementById("countdown");
-    const examDate = new Date("September 1, 2025 09:00:00").getTime();
-
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = examDate - now;
-
-      if (distance < 0) {
-        clearInterval(timer);
-        countdown.innerHTML = "🎉 Gabby’s exam day is here! You’ve got this!";
-      } else {
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        countdown.innerHTML = `${days} days, ${hours} hrs, ${minutes} mins, ${seconds} secs`;
-      }
-    }, 1000);
   </script>
 </body>
-  </html>
+    </html>

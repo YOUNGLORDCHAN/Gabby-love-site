@@ -13,7 +13,7 @@
       font-family: 'Great Vibes', cursive;
       color: white;
       text-align: center;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     .container {
@@ -58,7 +58,27 @@
       top: 0;
       left: 0;
       pointer-events: none;
-      z-index: 999;
+      z-index: 0;
+    }
+
+    .message-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #ff4081;
+      color: white;
+      border: none;
+      padding: 14px 18px;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .message-btn:hover {
+      transform: scale(1.1);
     }
 
     @media only screen and (max-width: 600px) {
@@ -67,7 +87,7 @@
     }
   </style>
 </head>
-<body onclick="startShow()">
+<body>
 
   <canvas id="fireworksCanvas"></canvas>
 
@@ -91,6 +111,10 @@
     </div>
   </div>
 
+  <!-- Floating message icon button -->
+  <button class="message-btn" onclick="startShow()">💌</button>
+
+  <!-- Audio Elements -->
   <audio id="fireworkSound" src="fireworks.mp3"></audio>
   <audio id="bgMusic" src="love.mp3" loop></audio>
 
@@ -106,7 +130,6 @@
         document.getElementById('bgMusic').play();
       }, 1500);
 
-      // Start fireworks
       launchFireworks();
     }
 
@@ -201,6 +224,5 @@
       animate();
     }
   </script>
-
 </body>
-    </html>
+  </html>

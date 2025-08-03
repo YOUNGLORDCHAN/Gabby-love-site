@@ -4,82 +4,87 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>For Gabby</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
       background: linear-gradient(to bottom right, #3f87a6, #f78da7);
-      background-size: cover;
-      background-position: center;
       color: white;
-      font-family: 'Dancing Script', cursive;
+      font-family: 'Great Vibes', cursive;
       overflow-x: hidden;
     }
 
     .welcome {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: linear-gradient(to bottom right, #3f87a6, #f78da7);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000000cc;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3em;
-      z-index: 999;
-      animation: fadeInOut 3s forwards;
-    }
-
-    @keyframes fadeInOut {
-      0% { opacity: 0; }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
-    }
-
-    .container {
-      text-align: center;
-      padding: 60px 20px;
-      max-width: 850px;
-      margin: auto;
+      font-size: 2em;
+      z-index: 100;
       animation: fadeIn 2s ease-in-out;
-      display: none;
-    }
-
-    h1 {
-      font-size: 3em;
-      margin-bottom: 30px;
-    }
-
-    p {
-      font-size: 1.6em;
-      margin-bottom: 25px;
-      line-height: 1.8;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .typewriter {
-      font-size: 2em;
-      font-weight: bold;
-      margin: 40px auto;
-      width: fit-content;
-      border-right: 3px solid white;
-      white-space: nowrap;
       overflow: hidden;
-      animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
+      white-space: nowrap;
+      border-right: 2px solid white;
+      animation: typing 4s steps(40, end), blink 0.8s infinite;
+      width: 0;
+      margin: 40px auto;
+      text-align: center;
+      font-size: 2.2em;
     }
 
     @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
+      from { width: 0 }
+      to { width: 100% }
     }
 
     @keyframes blink {
-      50% { border-color: transparent; }
+      50% { border-color: transparent }
+    }
+
+    .container {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      max-width: 850px;
+      margin: auto;
+    }
+
+    button {
+      font-size: 1.4em;
+      padding: 10px 25px;
+      border: none;
+      background-color: white;
+      color: #f78da7;
+      font-weight: bold;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      margin-top: 20px;
+      font-family: 'Great Vibes', cursive;
+    }
+
+    button:hover {
+      background-color: #fce4ec;
+    }
+
+    #message {
+      display: none;
+      margin-top: 30px;
+      font-size: 1.4em;
+      line-height: 1.8;
+    }
+
+    audio {
+      display: none;
     }
 
     .heart {
@@ -102,8 +107,15 @@
       border-radius: 50%;
     }
 
-    .heart::before { top: -10px; left: 0; }
-    .heart::after { left: -10px; top: 0; }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
 
     @keyframes float {
       0% {
@@ -118,154 +130,83 @@
       }
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     @media only screen and (max-width: 600px) {
-      h1 { font-size: 2.2em; }
-      p { font-size: 1.3em; }
-    }
-
-    #toggleBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.8);
-      border: none;
-      padding: 10px 15px;
-      border-radius: 20px;
-      font-size: 1.2em;
-      color: #d6336c;
-      cursor: pointer;
-      z-index: 998;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-    }
-
-    #toggleBtn:hover {
-      background: #fff;
-    }
-
-    #revealBtn {
-      display: block;
-      margin: 50px auto;
-      padding: 10px 30px;
-      font-size: 1.5em;
-      background: white;
-      color: #d6336c;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 3px 5px rgba(0,0,0,0.2);
-    }
-
-    #message {
-      display: none;
-      opacity: 0;
-      transition: opacity 2s ease-in-out;
-    }
-
-    #message.show {
-      display: block;
-      opacity: 1;
-    }
-
-    .bottom-text {
-      position: fixed;
-      bottom: 70px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1.3em;
-      color: white;
-      text-align: center;
-      animation: glow 3s infinite ease-in-out;
-      z-index: 2;
-    }
-
-    @keyframes glow {
-      0%, 100% { opacity: 0.8; text-shadow: 0 0 10px #fff; }
-      50% { opacity: 1; text-shadow: 0 0 20px #f0f; }
+      .typewriter { font-size: 1.6em; }
+      #message { font-size: 1.2em; }
     }
   </style>
 </head>
 <body>
-  <div class="welcome">Hi Gabby 💕</div>
 
-  <div class="container" id="mainContent">
-    <div class="typewriter">Happy belated Girlfriend’s Day, mi amor 💗</div>
-
-    <button id="revealBtn">Message for You 💌</button>
-
-    <div id="message">
-      <h1>To My Dearest Gabby 💖</h1>
-      <p>You are the light that brightens my every day, the calm in my chaos, and the dream I never want to wake up from. Gabby, your strength, your smile, and your heart make this world a better place.</p>
-      <p>I just want to say how grateful I am to have you. Your presence in my life brings so much warmth, laughter, and peace. Loving you has made me a better person.</p>
-      <p>Every day I spend with you feels like magic. You’re beautiful inside and out, and I admire how you carry yourself with so much grace, kindness, and determination. I want to walk this life with you — through the highs and lows — hand in hand, heart to heart.</p>
-      <p>I love you endlessly, Gabby. I’m so proud of you. Always and forever.</p>
-    </div>
+  <!-- Welcome Screen -->
+  <div class="welcome" id="welcomeScreen">
+    Loading surprise for Gabby 💗...
   </div>
 
-  <div class="bottom-text">No matter where life takes us, I’ll always be cheering you on. ❤️</div>
-
-  <audio id="bg-music" loop>
-    <source src="love.mp3" type="audio/mpeg">
-    Your browser does not support the audio tag.
-  </audio>
-
-  <button id="toggleBtn">💖</button>
-
+  <!-- Floating Hearts -->
   <script>
-    // Floating hearts
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 20; i++) {
       const heart = document.createElement('div');
       heart.className = 'heart';
       heart.style.setProperty('--i', Math.random());
       heart.style.left = `${Math.random() * 100}%`;
       document.body.appendChild(heart);
     }
+  </script>
 
-    // Fade in music
-    const music = document.getElementById("bg-music");
-    const toggleBtn = document.getElementById("toggleBtn");
+  <!-- Main Content -->
+  <div class="container" id="mainContent">
+    <div class="typewriter">Happy belated Girlfriend’s Day, mi amor 💗</div>
 
-    function fadeIn(audio) {
-      audio.volume = 0;
-      audio.play().then(() => {
-        let vol = 0;
-        const interval = setInterval(() => {
-          if (vol < 1) {
-            vol += 0.05;
-            audio.volume = vol;
-          } else {
-            clearInterval(interval);
-          }
-        }, 200);
-      }).catch(() => {
-        document.body.addEventListener("click", () => fadeIn(audio), { once: true });
-      });
-    }
+    <button id="revealBtn">Message for You 💌</button>
 
-    // Start after welcome screen
+    <div id="message">
+      <p>
+        You are the light that brightens my every day, the calm in my chaos, and the dream I never want to wake up from. Gabby, your strength, your smile, and your heart make this world a better place.
+      </p>
+      <p>
+        I just want to say how grateful I am to have you. Your presence in my life brings so much warmth, laughter, and peace. Loving you has made me a better person.
+      </p>
+      <p>
+        Every day I spend with you feels like magic. You’re beautiful inside and out, and I admire how you carry yourself with so much grace, kindness, and determination. I want to walk this life with you — through the highs and lows — hand in hand, heart to heart.
+      </p>
+      <p>
+        I love you endlessly, Gabby. I’m so proud of you. Always and forever. 💖
+      </p>
+    </div>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="love.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <!-- Script -->
+  <script>
+    const revealBtn = document.getElementById("revealBtn");
+    const message = document.getElementById("message");
+    const music = document.getElementById("bgMusic");
+
+    revealBtn.addEventListener("click", () => {
+      message.style.display = "block";
+      revealBtn.style.display = "none";
+    });
+
+    // Fade out welcome screen and show main content
     setTimeout(() => {
-      document.querySelector(".welcome").style.display = "none";
+      document.getElementById("welcomeScreen").style.display = "none";
       document.getElementById("mainContent").style.display = "block";
-      fadeIn(music);
+      music.play().catch(() => {
+        // Music may not autoplay until user interacts
+        console.log("Music autoplay blocked, will play on interaction.");
+      });
     }, 3000);
-
-    // Music toggle
-    let isPlaying = true;
-    toggleBtn.onclick = () => {
-      if (isPlaying) {
-        music.pause();
-        toggleBtn.textContent = "🔇";
-      } else {
-        fadeIn(music);
-        toggleBtn.textContent = "💖";
-      }
-      isPlaying = !isPlaying;
-    };
-
-    // Reveal message
-    document.getElementById("revealBtn").onclick = function() {
-      document.getElementById("message").classList.add("show");
-      this.style.display = "none";
-    };
   </script>
 </body>
   </html>

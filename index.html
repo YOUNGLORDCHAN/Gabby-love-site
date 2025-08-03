@@ -3,85 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gabby's Surprise</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <title>To My Love, Gabby</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
   <style>
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
-
-    body, html {
-      height: 100%;
+    body {
+      margin: 0;
+      padding: 0;
       font-family: 'Great Vibes', cursive;
-      overflow: hidden;
-    }
-
-    #loginPage {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom right, #0f0c29, #302b63, #24243e);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       color: white;
-      z-index: 10;
+      text-align: center;
+      overflow-x: hidden;
+      height: 100vh;
     }
 
-    #loginPage h2 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-    }
-
-    #loginPage input {
-      padding: 10px;
-      font-size: 1.2em;
-      margin: 8px;
-      border: none;
-      border-radius: 5px;
-      width: 250px;
-    }
-
-    #loginPage button {
-      padding: 10px 20px;
-      font-size: 1.2em;
-      margin-top: 12px;
-      background: #ff4081;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    #loginPage .error {
-      margin-top: 10px;
-      color: #ff8080;
-    }
-
-    #mainPage {
-      display: none;
-      width: 100%;
-      height: 100%;
-    }
-
-    video.bg-video {
+    #bgVideo {
       position: fixed;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 100vw;
       height: 100vh;
       object-fit: cover;
       z-index: -1;
     }
 
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .login-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 10px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 1em;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
     .container {
       padding: 50px 20px;
       max-width: 850px;
       margin: auto;
-      color: white;
-      text-align: center;
     }
 
     h1 {
@@ -102,12 +86,24 @@
       white-space: nowrap;
       overflow: hidden;
       border-right: 3px solid white;
-      animation: typing 6s steps(50, end) infinite alternate;
+      animation: typing 6s steps(40, end) infinite, blink .75s step-end infinite;
     }
 
     @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+      0% { width: 0; }
+      100% { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .message-btn {
@@ -130,14 +126,6 @@
       transform: scale(1.1);
     }
 
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
-
     @media only screen and (max-width: 600px) {
       h1 { font-size: 2.2em; }
       p { font-size: 1.4em; }
@@ -146,64 +134,52 @@
 </head>
 <body>
 
-  <!-- Login Page -->
-  <div id="loginPage">
-    <h2>Welcome, my love 💖</h2>
-    <input type="text" id="username" placeholder="Username" />
-    <input type="password" id="password" placeholder="Password" />
-    <button onclick="checkLogin()">Enter</button>
-    <div class="error" id="errorMsg"></div>
-  </div>
+  <!-- Background Video -->
+  <video autoplay muted loop id="bgVideo">
+    <source src="gabby.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
-  <!-- Main Content Page -->
-  <div id="mainPage">
-    <video autoplay loop muted class="bg-video">
-      <source src="gabby-video.mp4" type="video/mp4" />
-      Your browser does not support HTML5 video.
-    </video>
-
-    <canvas id="fireworksCanvas"></canvas>
-
-    <div class="container">
-      <h1>To My Dearest Gabby 💖</h1>
-      <p>
-        You are my calm in every storm, the spark in my soul, and the most beautiful chapter in my life.
-      </p>
-      <p>
-        As you prepare for your upcoming exam on September 1st, I want you to know that I believe in you with every beat of my heart.
-      </p>
-      <p>
-        You’re brilliant, strong, and capable — nothing can stop you. Let your heart shine through your hard work.
-      </p>
-      <p>
-        Happy belated Girlfriend's Day, mi amor. I’m here cheering for you, always.
-      </p>
-
-      <div id="endingText" class="ending-text">
-        Forever yours — in love, in life, in every heartbeat 💞
-      </div>
+  <!-- Login Screen -->
+  <div class="login-container" id="loginPage">
+    <div class="login-box">
+      <h1>Enter Love Code</h1>
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="checkLogin()">Login</button>
     </div>
-
-    <!-- Floating message icon -->
-    <button class="message-btn" onclick="startShow()">💌</button>
   </div>
 
-  <!-- Audio -->
+  <!-- Main Page -->
+  <canvas id="fireworksCanvas"></canvas>
+
+  <div class="container" id="mainPage" style="display:none;">
+    <h1>To My Dearest Gabby 💖</h1>
+    <p>You are my calm in every storm, the spark in my soul, and the most beautiful chapter in my life.</p>
+    <p>As you prepare for your upcoming exam on September 1st, I want you to know that I believe in you with every beat of my heart.</p>
+    <p>You’re brilliant, strong, and capable — nothing can stop you. Let your heart shine through your hard work.</p>
+    <p>Happy belated Girlfriend's Day, mi amor. I’m here cheering for you, always.</p>
+    <div id="endingText" class="ending-text">
+      Forever yours — in love, in life, in every heartbeat 💞
+    </div>
+  </div>
+
+  <button class="message-btn" id="showBtn" onclick="startShow()" style="display:none;">💌</button>
+
+  <!-- Sounds -->
   <audio id="fireworkSound" src="fireworks.mp3"></audio>
   <audio id="bgMusic" src="love.mp3" loop></audio>
 
   <script>
     function checkLogin() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
-      const error = document.getElementById("errorMsg");
-
-      if (user === "gabby" && pass === "love123") {
+      const u = document.getElementById("username").value;
+      const p = document.getElementById("password").value;
+      if (u === "gabby" && p === "love123") {
         document.getElementById("loginPage").style.display = "none";
         document.getElementById("mainPage").style.display = "block";
-        window.scrollTo(0, 0);
+        document.getElementById("showBtn").style.display = "block";
       } else {
-        error.textContent = "Incorrect username or password.";
+        alert("Wrong username or password!");
       }
     }
 
@@ -216,7 +192,7 @@
       document.getElementById('fireworkSound').play();
       setTimeout(() => {
         document.getElementById('bgMusic').play();
-      }, 1500);
+      }, 1000);
 
       launchFireworks();
     }
@@ -248,7 +224,7 @@
         }
 
         explode() {
-          for (let i = 0; i < 30; i++) {
+          for (let i = 0; i < 25; i++) {
             this.sparkles.push({
               x: this.x,
               y: this.y,
@@ -299,7 +275,7 @@
 
       function animate() {
         ctx.clearRect(0, 0, W, H);
-        if (Math.random() < 0.1) fireworks.push(new Firework());
+        if (Math.random() < 0.07) fireworks.push(new Firework());
 
         fireworks.forEach(fw => {
           fw.update();
@@ -313,4 +289,4 @@
     }
   </script>
 </body>
-      </html>
+    </html>

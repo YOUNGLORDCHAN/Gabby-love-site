@@ -6,36 +6,75 @@
   <title>To My Love, Gabby</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
   <style>
-    /* Basic reset */
     body, html {
-      margin: 0; padding: 0; height: 100%; overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: linear-gradient(to bottom right, #6dd5fa, #fbc2eb);
       font-family: 'Great Vibes', cursive;
       color: white;
+      text-align: center;
+      overflow-x: hidden;
       scroll-behavior: smooth;
-      position: relative;
     }
 
-    /* Hide main content initially */
+    /* Hide main content until login */
     #mainContent {
       display: none;
-      position: relative;
-      z-index: 1;
       max-width: 850px;
-      margin: auto;
       padding: 50px 20px;
-      text-align: center;
+      margin: auto;
     }
 
-    /* Login overlay */
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.8em;
+      margin-bottom: 25px;
+      line-height: 1.8;
+    }
+
+    .ending-text {
+      font-size: 2em;
+      margin-top: 60px;
+      color: #fff0f5;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid white;
+      width: max-content;
+      animation:
+        typing 4s steps(40) infinite,
+        blink 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      0% {
+        width: 0ch;
+      }
+      100% {
+        width: 40ch;
+      }
+    }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    /* Login overlay styles */
     #loginOverlay {
       position: fixed;
       top:0; left:0; right:0; bottom:0;
-      background: rgba(0,0,0,0.95);
+      background: rgba(0,0,0,0.85);
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       z-index: 10;
+      flex-direction: column;
       color: white;
       font-family: Arial, sans-serif;
     }
@@ -67,51 +106,6 @@
       background-color: #e73370;
     }
 
-    /* Background video */
-    #bgVideo {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: -1;
-      filter: brightness(0.6);
-    }
-
-    /* Text styling */
-    h1 {
-      font-size: 3em;
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 1.8em;
-      margin-bottom: 25px;
-      line-height: 1.8;
-    }
-
-    .ending-text {
-      font-size: 2em;
-      margin-top: 60px;
-      color: #fff0f5;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 3px solid white;
-      width: max-content;
-      animation:
-        typing 4s steps(40) infinite,
-        blink 0.75s step-end infinite;
-    }
-
-    @keyframes typing {
-      0% { width: 0ch; }
-      100% { width: 40ch; }
-    }
-
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
-
     @media only screen and (max-width: 600px) {
       h1 { font-size: 2.2em; }
       p { font-size: 1.4em; }
@@ -122,17 +116,11 @@
 
   <!-- Login Overlay -->
   <div id="loginOverlay">
-    <h2>Please log in to see my message</h2>
+    <h2>Welcome, please log in</h2>
     <input type="text" id="usernameInput" placeholder="Username" autocomplete="off" />
     <input type="password" id="passwordInput" placeholder="Password" autocomplete="off" />
     <button onclick="checkLogin()">Login</button>
   </div>
-
-  <!-- Background Video -->
-  <video autoplay muted loop playsinline id="bgVideo" style="display:none;">
-    <source src="background.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
 
   <!-- Main Content -->
   <div id="mainContent">
@@ -153,10 +141,10 @@
     <div class="ending-text">
       Forever yours — in love, in life, in every heartbeat 💞
     </div>
-  </div>
 
-  <!-- Background Music -->
-  <audio id="bgMusic" src="love.mp3" loop></audio>
+    <!-- Background Music -->
+    <audio id="bgMusic" src="love.mp3" autoplay loop></audio>
+  </div>
 
   <script>
     const correctUsername = 'gabby';
@@ -167,14 +155,8 @@
       const pass = document.getElementById('passwordInput').value.trim();
 
       if(user === correctUsername && pass === correctPassword){
-        // Hide login overlay
         document.getElementById('loginOverlay').style.display = 'none';
-
-        // Show video and main content
-        document.getElementById('bgVideo').style.display = 'block';
         document.getElementById('mainContent').style.display = 'block';
-
-        // Play music (need user interaction to allow autoplay)
         document.getElementById('bgMusic').play();
       } else {
         alert('Wrong username or password! Please try again.');
@@ -183,4 +165,4 @@
   </script>
 
 </body>
-    </html>
+  </html>
